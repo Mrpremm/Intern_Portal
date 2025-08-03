@@ -79,6 +79,7 @@ const mockData = {
   ],
   departments: ["Marketing", "Development", "Design", "Operations", "Sales", "HR", "Finance"]
 };
+const API_BASE = "https://intern-portal-gmou.onrender.com/api";
 
 // Application state
 let currentUser = null;
