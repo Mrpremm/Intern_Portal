@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-color-scheme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- Login/Signup Page -->
+    <div id="auth-page" class="page active">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1 class="auth-title">Intern Portal</h1>
+                
+                <!-- Tab Navigation -->
+                <div class="tab-nav">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="signup">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="login-tab" class="tab-content active">
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email" class="form-label">Email</label>
+                            <input type="email" id="login-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password" class="form-label">Password</label>
+                            <input type="password" id="login-password" class="form-control" required>
+                        </div>
+                        <div class="auth-error hidden" id="login-error"></div>
+                        <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signup-tab" class="tab-content">
+                    <form id="signup-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="signup-name" class="form-label">Full Name</label>
+                            <input type="text" id="signup-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email" class="form-label">Email</label>
+                            <input type="email" id="signup-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-department" class="form-label">Department</label>
+                            <select id="signup-department" class="form-control" required>
+                                <option value="">Select Department</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Development">Development</option>
+                                <option value="Design">Design</option>
+                                <option value="Operations">Operations</option>
+                                <option value="Sales">Sales</option>
+                                <option value="HR">HR</option>
+                                <option value="Finance">Finance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password" class="form-label">Password</label>
+                            <input type="password" id="signup-password" class="form-control" required>
+                        </div>
+                        <div class="auth-error hidden" id="signup-error"></div>
+                        <button type="submit" class="btn btn--primary btn--full-width">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="header-title">Intern Portal</h1>
+                    <nav class="nav">
+                        <div class="nav-desktop">
+                            <a href="#" class="nav-link active" data-page="dashboard">Dashboard</a>
+                            <a href="#" class="nav-link" data-page="leaderboard">Leaderboard</a>
+                            <button class="btn btn--outline btn--sm logout-btn">Logout</button>
+                        </div>
+                        <button class="nav-mobile-toggle">
+                            <span class="hamburger"></span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="nav-mobile-overlay hidden">
+            <div class="nav-mobile-content">
+                <a href="#" class="nav-mobile-link active" data-page="dashboard">Dashboard</a>
+                <a href="#" class="nav-mobile-link" data-page="leaderboard">Leaderboard</a>
+                <button class="btn btn--outline logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <main class="main">
+            <div class="container">
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <h2 id="welcome-text">Welcome back!</h2>
+                    <p class="welcome-subtitle">Here's your performance overview</p>
+                </section>
+
+                <!-- Dashboard Cards -->
+                <div class="dashboard-grid">
+                    <!-- Profile Card -->
+                    <div class="card profile-card">
+                        <div class="card__body">
+                            <h3 class="card-title">Profile</h3>
+                            <div class="profile-info">
+                                <div class="profile-item">
+                                    <span class="profile-label">Name:</span>
+                                    <span id="profile-name" class="profile-value">-</span>
+                                </div>
+                                <div class="profile-item">
+                                    <span class="profile-label">Department:</span>
+                                    <span id="profile-department" class="profile-value">-</span>
+                                </div>
+                                <div class="profile-item">
+                                    <span class="profile-label">Join Date:</span>
+                                    <span id="profile-join-date" class="profile-value">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Referral Code Card -->
+                    <div class="card referral-card">
+                        <div class="card__body">
+                            <h3 class="card-title">Referral Code</h3>
+                            <div class="referral-content">
+                                <div class="referral-code" id="referral-code">-</div>
+                                <button class="btn btn--secondary btn--sm copy-btn" id="copy-referral">
+                                    Copy Code
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Donations Card -->
+                    <div class="card donations-card">
+                        <div class="card__body">
+                            <h3 class="card-title">Donations Raised</h3>
+                            <div class="donations-amount" id="donations-amount">$0</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span>Goal: $5,000</span>
+                                <span id="progress-percentage">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rewards Card -->
+                    <div class="card rewards-card">
+                        <div class="card__body">
+                            <h3 class="card-title">Achievements</h3>
+                            <div class="rewards-grid" id="rewards-grid">
+                                <!-- Rewards will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaderboard Page -->
+    <div id="leaderboard-page" class="page">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="header-title">Intern Portal</h1>
+                    <nav class="nav">
+                        <div class="nav-desktop">
+                            <a href="#" class="nav-link" data-page="dashboard">Dashboard</a>
+                            <a href="#" class="nav-link active" data-page="leaderboard">Leaderboard</a>
+                            <button class="btn btn--outline btn--sm logout-btn">Logout</button>
+                        </div>
+                        <button class="nav-mobile-toggle">
+                            <span class="hamburger"></span>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Navigation Overlay -->
+        <div class="nav-mobile-overlay hidden">
+            <div class="nav-mobile-content">
+                <a href="#" class="nav-mobile-link" data-page="dashboard">Dashboard</a>
+                <a href="#" class="nav-mobile-link active" data-page="leaderboard">Leaderboard</a>
+                <button class="btn btn--outline logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <main class="main">
+            <div class="container">
+                <section class="leaderboard-section">
+                    <h2>Leaderboard</h2>
+                    <p class="leaderboard-subtitle">Top performing interns ranked by donations raised</p>
+                    
+                    <div class="card">
+                        <div class="leaderboard-table-container">
+                            <table class="leaderboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Donations</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaderboard-tbody">
+                                    <!-- Leaderboard data will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
